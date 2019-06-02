@@ -76,7 +76,7 @@ test
 [nodemon] clean exit - waiting for changes before restart
 ```
 
-## `package.json` finally
+## `package.json`
 
 ```js
 {
