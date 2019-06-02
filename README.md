@@ -136,3 +136,51 @@ const PORT = 3000;
 main();
 
 ```
+
+## Install
+
+```cmd
+npm install dotenv --save-dev
+```
+
+## Add to `server.js`:
+
+```js
+if (process.env.NODE_ENV != 'production') {
+  require('dotenv').config();
+}
+```
+
+## Create `.env` file with:
+
+```env
+NODE_ENV=<environment_name>
+PORT=<port_number>
+DB_HOST=<db_host_name>
+DB_PORT=<db_port_number>
+
+```
+
+## Create `database.js` with:
+
+```js
+import MongoClient from 'mongodb';
+
+const DB_HOST = process.env.DB_HOST || 'localhost';
+const DB_PORT = process.env.DB_PORT || '27017';
+
+export const connect = async () => {
+  try{
+    const client = await MongoClient.connect(
+      `mongodb://${DB_HOST}:${DB_PORT}`,
+      { useNewUrlParser: true });
+    const db = client.db('node-api-rest');
+    console.info('DB is connected');
+
+    return db;
+  } catch(e) {
+    return console.error(e);
+  }
+}
+
+```
