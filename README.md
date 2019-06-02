@@ -105,4 +105,34 @@ test
     "nodemon": "^1.19.1"
   }
 }
-````
+```
+## Server
+### Create `server.js` file into `src` with:
+
+```js
+import express from 'express';
+
+const app = express();
+
+app.get('/', (req, res) => res.send('Hello world'));
+
+export default app;
+
+```
+
+and change `index.js` file content with:
+
+```js
+import '@babel/polyfill';
+
+import app from  './server';
+
+const PORT = 3000;
+ const main = async () => {
+  await app.listen(PORT);
+  console.log(`Server on port, ${PORT}`);
+}
+
+main();
+
+```
